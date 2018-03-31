@@ -1,0 +1,9 @@
+{
+  "name": "todoist-cli",
+  "version": "1.0.0",
+  "description": "CLI for interacting with Todoist projects and tasks.",
+  "main": "index.js",
+  "repository": "https://github.com/fredcollman/todoist-cli.git",
+  "author": "Fred Collman <fredcollman@gmail.com>",
+  "license": "MIT"
+}
