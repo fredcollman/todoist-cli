@@ -19,6 +19,14 @@ const listProjects = () =>
     },
   }).then(readResponse);
 
+const listTasks = () =>
+  fetch(`${API_ROOT_URL}/tasks`, {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+  }).then(readResponse);
+
 module.exports = {
   listProjects,
+  listTasks,
 };
