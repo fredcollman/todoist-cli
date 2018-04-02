@@ -1,8 +1,8 @@
 const opn = require('opn');
-const api = require('../../api');
+const client = require('../../client');
 
 const main = console => argv =>
-  api
+  client()
     .getTask({ name: argv.name })
     .then(task => opn(task.url))
     .catch(console.error);

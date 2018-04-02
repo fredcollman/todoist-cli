@@ -1,8 +1,8 @@
-const api = require('../../api');
+const client = require('../../client');
 const { formatProject } = require('../../format');
 
 const main = console => argv =>
-  api
+  client()
     .getProject({ name: argv.name })
     .then(formatProject)
     .then(console.log)
