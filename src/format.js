@@ -11,8 +11,14 @@ const indentTask = task => `${'   '.repeat(task.indent - 1)}- ${task.content}`;
 
 const formatTasks = tasks => tasks.map(indentTask).join('\n');
 
+const formatTask = task => `\
+ID: ${task.id}
+Name: ${task.content}
+URL: ${task.url}`;
+
 module.exports = {
   formatProject,
   formatProjects,
   formatTasks,
+  formatTask,
 };

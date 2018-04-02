@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { findByName } = require('./search');
+const { findByName, findBy } = require('./search');
 
 const API_ROOT_URL = 'https://beta.todoist.com/API/v8';
 const API_TOKEN = process.env.TODOIST_API_TOKEN;
@@ -29,7 +29,7 @@ const listAllTasks = () =>
     },
   }).then(readResponse);
 
-const listTasks = ({ projectName }) => {
+const listTasks = ({ projectName } = { projectName: null }) => {
   if (!projectName) {
     return listAllTasks();
   }
@@ -39,8 +39,11 @@ const listTasks = ({ projectName }) => {
   );
 };
 
+const getTask = ({ name }) => listTasks().then(findBy('content', name));
+
 module.exports = {
   listProjects,
   listTasks,
   getProject,
+  getTask,
 };
