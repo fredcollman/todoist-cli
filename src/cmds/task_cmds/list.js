@@ -1,16 +1,16 @@
 const api = require('../../api');
 const { formatTasks } = require('../../format');
 
-const main = console =>
+const main = console => argv =>
   api
-    .listTasks()
+    .listTasks({ projectName: argv.project })
     .then(formatTasks)
     .then(console.log)
     .catch(console.error);
 
 module.exports = {
-  command: 'list',
+  command: 'list [project]',
   aliases: ['ls'],
   describe: 'list all tasks',
-  handler: () => main(console),
+  handler: main(console),
 };

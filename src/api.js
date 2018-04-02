@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { findByName } = require('./search');
 
 const API_ROOT_URL = 'https://beta.todoist.com/API/v8';
 const API_TOKEN = process.env.TODOIST_API_TOKEN;
@@ -19,14 +20,27 @@ const listProjects = () =>
     },
   }).then(readResponse);
 
-const listTasks = () =>
+const getProject = ({ name }) => listProjects().then(findByName(name));
+
+const listAllTasks = () =>
   fetch(`${API_ROOT_URL}/tasks`, {
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
     },
   }).then(readResponse);
 
+const listTasks = ({ projectName }) => {
+  if (!projectName) {
+    return listAllTasks();
+  }
+
+  return Promise.all([getProject({ name: projectName }), listAllTasks()]).then(
+    ([project, tasks]) => tasks.filter(task => task.project_id === project.id)
+  );
+};
+
 module.exports = {
   listProjects,
   listTasks,
+  getProject,
 };
