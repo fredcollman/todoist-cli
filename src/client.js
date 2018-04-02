@@ -5,13 +5,11 @@ module.exports = (api = require('./api')) => {
   const getProject = ({ name }) => listProjects().then(findByName(name));
 
   const listTasks = async ({ projectName } = { projectName: null }) => {
-    const tasks = await listAllTasks();
-    if (projectName) {
-      const project = await getProject({ name: projectName });
-      return tasks.filter(task => task.project_id === project.id);
-    } else {
-      return tasks;
+    if (!projectName) {
+      return await listAllTasks();
     }
+    const project = await getProject({ name: projectName });
+    return await listAllTasks({ project });
   };
 
   const getTask = ({ name }) => listTasks().then(findBy('content', name));
