@@ -1,4 +1,4 @@
 require('yargs')
-  .command(require('./src/commands/projects'))
+  .commandDir('./src/cmds')
   .demandCommand()
   .help().argv;
