@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const qs = require('querystring');
 
-const API_ROOT_URL = 'https://beta.todoist.com/API/v8';
+const API_ROOT_URL = 'https://api.todoist.com/rest/v1';
 const API_TOKEN = process.env.TODOIST_API_TOKEN;
 
 const handleBadResponse = response => {
